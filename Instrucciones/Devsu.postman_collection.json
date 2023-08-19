@@ -1,0 +1,618 @@
+{
+	"info": {
+		"_postman_id": "1eadcea6-0dec-448b-9d13-886690c04b10",
+		"name": "Devsu",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23579550"
+	},
+	"item": [
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Crear Cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// request log\r",
+									"console.log(\"Request\");\r",
+									"console.log(pm.request);\r",
+									"\r",
+									"// verify the status code\r",
+									"pm.test(\"Crate a new cliente - Happy Path 1.0 - Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"const schema = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"properties\": {\r",
+									"        \"nombre\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"genero\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"edad\": {\r",
+									"            \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"identificacion\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"direccion\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"telefono\": {\r",
+									"            \"type\": \"string\",\r",
+									"            \"nullable\": true\r",
+									"        },\r",
+									"        \"contraseña\": {\r",
+									"            \"type\": \"string\"\r",
+									"        },\r",
+									"        \"estado\": {\r",
+									"            \"type\": \"boolean\"\r",
+									"        }\r",
+									"\r",
+									"    },\r",
+									"    \"additionalProperties\": false\r",
+									"};\r",
+									"\r",
+									"// validate schema\r",
+									"pm.test(\"Crate a new cliente - Happy Path 1.0 - Validate schema\", () => {\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"// response log\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"\r",
+									"console.log(\"ResponseBody\");\r",
+									"console.log(jsonData);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"German\",\r\n  \"genero\": \"masc\",\r\n  \"edad\": 30,\r\n  \"identificacion\": \"234234\",\r\n  \"direccion\": \"123123123\",\r\n  \"telefono\": \"123123123\",\r\n  \"contraseña\": \"123123123\",\r\n  \"estado\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7164/clientes",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7164",
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Cliente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"German2\",\r\n  \"genero\": \"mascu\",\r\n  \"edad\": 31,\r\n  \"identificacion\": \"1234234\",\r\n  \"direccion\": \"4123123123\",\r\n  \"telefono\": \"4123123123\",\r\n  \"contraseña\": \"4123123123\",\r\n  \"estado\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7164/clientes/:clienteId",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7164",
+							"path": [
+								"clientes",
+								":clienteId"
+							],
+							"variable": [
+								{
+									"key": "clienteId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Cliente",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"German2\",\r\n  \"genero\": \"mascu\",\r\n  \"edad\": 31,\r\n  \"identificacion\": \"1234234\",\r\n  \"direccion\": \"4123123123\",\r\n  \"telefono\": \"4123123123\",\r\n  \"contraseña\": \"4123123123\",\r\n  \"estado\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7164/clientes/:clienteId",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7164",
+							"path": [
+								"clientes",
+								":clienteId"
+							],
+							"variable": [
+								{
+									"key": "clienteId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Cliente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"German2\",\r\n  \"genero\": \"mascu\",\r\n  \"edad\": 31,\r\n  \"identificacion\": \"1234234\",\r\n  \"direccion\": \"4123123123\",\r\n  \"telefono\": \"4123123123\",\r\n  \"contraseña\": \"4123123123\",\r\n  \"estado\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7164/clientes/:clienteId",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7164",
+							"path": [
+								"clientes",
+								":clienteId"
+							],
+							"variable": [
+								{
+									"key": "clienteId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Clientes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"German2\",\r\n  \"genero\": \"mascu\",\r\n  \"edad\": 31,\r\n  \"identificacion\": \"1234234\",\r\n  \"direccion\": \"4123123123\",\r\n  \"telefono\": \"4123123123\",\r\n  \"contraseña\": \"4123123123\",\r\n  \"estado\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7164/clientes",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7164",
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cuentas",
+			"item": [
+				{
+					"name": "Crear Cuenta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cliente\": 2,\r\n  \"numeroCuenta\": \"234234234\",\r\n  \"tipoCuenta\": \"Cuenta Corriente\",\r\n  \"saldo\": 5000,\r\n  \"estado\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7164/cuentas",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7164",
+							"path": [
+								"cuentas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Cuenta",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cliente\": 2,\r\n  \"numeroCuenta\": \"3333\",\r\n  \"tipoCuenta\": \"Caja de Ahorro\",\r\n  \"saldo\": 1500,\r\n  \"estado\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7164/cuentas/:cuentaId",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7164",
+							"path": [
+								"cuentas",
+								":cuentaId"
+							],
+							"variable": [
+								{
+									"key": "cuentaId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Cuenta",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"German2\",\r\n  \"genero\": \"mascu\",\r\n  \"edad\": 31,\r\n  \"identificacion\": \"1234234\",\r\n  \"direccion\": \"4123123123\",\r\n  \"telefono\": \"4123123123\",\r\n  \"contraseña\": \"4123123123\",\r\n  \"estado\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7164/cuentas/:cuentaId",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7164",
+							"path": [
+								"cuentas",
+								":cuentaId"
+							],
+							"variable": [
+								{
+									"key": "cuentaId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Cuenta",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"German2\",\r\n  \"genero\": \"mascu\",\r\n  \"edad\": 31,\r\n  \"identificacion\": \"1234234\",\r\n  \"direccion\": \"4123123123\",\r\n  \"telefono\": \"4123123123\",\r\n  \"contraseña\": \"4123123123\",\r\n  \"estado\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7164/cuentas/:cuentaId",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7164",
+							"path": [
+								"cuentas",
+								":cuentaId"
+							],
+							"variable": [
+								{
+									"key": "cuentaId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Cuentas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"German2\",\r\n  \"genero\": \"mascu\",\r\n  \"edad\": 31,\r\n  \"identificacion\": \"1234234\",\r\n  \"direccion\": \"4123123123\",\r\n  \"telefono\": \"4123123123\",\r\n  \"contraseña\": \"4123123123\",\r\n  \"estado\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7164/cuentas",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7164",
+							"path": [
+								"cuentas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movimentos",
+			"item": [
+				{
+					"name": "Credito",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cuenta\": 1,\r\n  \"valor\": 1000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7164/movimientos/credito",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7164",
+							"path": [
+								"movimientos",
+								"credito"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Debito",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cuenta\": 1,\r\n  \"valor\": -500\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7164/movimientos/debito",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7164",
+							"path": [
+								"movimientos",
+								"debito"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener movimiento",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"German2\",\r\n  \"genero\": \"mascu\",\r\n  \"edad\": 31,\r\n  \"identificacion\": \"1234234\",\r\n  \"direccion\": \"4123123123\",\r\n  \"telefono\": \"4123123123\",\r\n  \"contraseña\": \"4123123123\",\r\n  \"estado\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7164/movimientos/:movimientoId",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7164",
+							"path": [
+								"movimientos",
+								":movimientoId"
+							],
+							"variable": [
+								{
+									"key": "movimientoId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Movimientos",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"German2\",\r\n  \"genero\": \"mascu\",\r\n  \"edad\": 31,\r\n  \"identificacion\": \"1234234\",\r\n  \"direccion\": \"4123123123\",\r\n  \"telefono\": \"4123123123\",\r\n  \"contraseña\": \"4123123123\",\r\n  \"estado\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7164/movimientos/:movimientoId",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7164",
+							"path": [
+								"movimientos",
+								":movimientoId"
+							],
+							"variable": [
+								{
+									"key": "movimientoId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Cuentas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"German2\",\r\n  \"genero\": \"mascu\",\r\n  \"edad\": 31,\r\n  \"identificacion\": \"1234234\",\r\n  \"direccion\": \"4123123123\",\r\n  \"telefono\": \"4123123123\",\r\n  \"contraseña\": \"4123123123\",\r\n  \"estado\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7164/movimientos",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7164",
+							"path": [
+								"movimientos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reportes",
+			"item": [
+				{
+					"name": "Reporte por Fecha",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7164/reportes?desde=2021-01-01&hasta=2023-12-31",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7164",
+							"path": [
+								"reportes"
+							],
+							"query": [
+								{
+									"key": "desde",
+									"value": "2021-01-01"
+								},
+								{
+									"key": "hasta",
+									"value": "2023-12-31"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
